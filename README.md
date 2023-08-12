@@ -1,0 +1,1 @@
+# KiCAD Schematic Blocks Plug-In

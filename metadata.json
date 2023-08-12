@@ -1,0 +1,35 @@
+{
+    "$schema": "https://go.kicad.org/pcm/schemas/v1",
+    "name": "My Beautiful Theme",
+    "description": "A theme that makes KiCad truly beautiful",
+    "description_full": "I came up with this theme in a dream one night.",
+    "identifier": "com.github.kicad-user.kicad-beautiful-theme",
+    "type": "colortheme",
+    "author": {
+        "name": "KiCad User",
+        "contact": {
+            "web": "https://mywebsite.com"
+        }
+    },
+    "maintainer": {
+        "name": "KiCad User",
+        "contact": {
+            "web": "https://mywebsite.com"
+        }
+    },
+    "license": "CC0-1.0",
+    "resources": {
+        "homepage": "https://github.com/kicad-user/kicad-beautiful-theme"
+    },
+    "versions": [
+        {
+            "version": "1.0",
+            "status": "stable",
+            "kicad_version": "5.99",
+            "download_sha256": "YOUR_SHA256_HERE",
+            "download_size": 1234,
+            "download_url": "https://github.com/YOUR/DOWNLOAD/URL/kicad-beautiful-theme.zip",
+            "install_size": 5678
+        }
+    ]
+}
