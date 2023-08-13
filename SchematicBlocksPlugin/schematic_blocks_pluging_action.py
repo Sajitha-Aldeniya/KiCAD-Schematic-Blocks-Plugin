@@ -22,7 +22,7 @@ class SchematicBlocksPluging(pcbnew.ActionPlugin):
     def Run(self):
         # The entry function of the plugin that is executed on user action
         print("Hello World")
-        app = ClipboardSaverApp(False)
+        app = SchematicBlockSaverPlugin(False)
         app.MainLoop()
         # pcbnew.Refresh()
         
@@ -34,37 +34,35 @@ class SchematicBlocksPluging(pcbnew.ActionPlugin):
 
 
 
-class ClipboardSaverApp(wx.App):
+class SchematicBlockSaverPlugin(wx.App):
     def OnInit(self):
-        self.frame = ClipboardSaverFrame(None, title="Clipboard Saver",size=(600, 800))
+        self.frame = SchematicBlockSaverFrame(None, title="Schematic Block Saver",size=(400, 600))
         self.SetTopWindow(self.frame)
         self.frame.Show()
         return True
 
-class ClipboardSaverFrame(wx.Frame):
+class SchematicBlockSaverFrame(wx.Frame):
     def __init__(self, *args, **kwargs):
-        super(ClipboardSaverFrame, self).__init__(*args, **kwargs)
+        super(SchematicBlockSaverFrame, self).__init__(*args, **kwargs)
 
         self.InitUI()
 
     def InitUI(self):
 
-
         self.Bind(wx.EVT_CLOSE, self.OnExit)
         load_config()
-
 
         panel = wx.Panel(self)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
 
-        label1 = wx.StaticText(panel, label="Enter file name:")
+        label1 = wx.StaticText(panel, label="Enter Schematic Block name:")
         vbox.Add(label1, flag=wx.TOP | wx.LEFT | wx.RIGHT, border=10)
 
         self.filename_input = wx.TextCtrl(panel)
         vbox.Add(self.filename_input, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 
-        save_button = wx.Button(panel, label="Save Clipboard to .kicad_pack")
+        save_button = wx.Button(panel, label="Save Block")
         vbox.Add(save_button, flag=wx.EXPAND | wx.ALL, border=10)
 
         label2 = wx.StaticText(panel, label="Select a .kicad_pack file to import:")
@@ -76,10 +74,10 @@ class ClipboardSaverFrame(wx.Frame):
         self.file_list = wx.ListBox(panel)
         vbox.Add(self.file_list, proportion=1, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 
-        import_button = wx.Button(panel, label="Import Selected File to Clipboard")
+        import_button = wx.Button(panel, label="Import Selected Block to Clipboard")
         vbox.Add(import_button, flag=wx.EXPAND | wx.ALL, border=10)
 
-        import_to_dir_button = wx.Button(panel, label="Import to Current Directory")
+        import_to_dir_button = wx.Button(panel, label="Import Block")
         vbox.Add(import_to_dir_button, flag=wx.EXPAND | wx.ALL, border=10)
 
         dir_button = wx.Button(panel, label="Change Working Directory")
@@ -88,7 +86,7 @@ class ClipboardSaverFrame(wx.Frame):
         open_dir_button = wx.Button(panel, label="Open Working Directory")
         vbox.Add(open_dir_button, flag=wx.EXPAND | wx.ALL, border=10)
 
-        delete_button = wx.Button(panel, label="Delete Selected File")
+        delete_button = wx.Button(panel, label="Delete Selected Block")
         delete_button.SetForegroundColour(wx.Colour(255, 0, 0))  # Set text color to red
         vbox.Add(delete_button, flag=wx.EXPAND | wx.ALL, border=10)
 
@@ -106,6 +104,11 @@ class ClipboardSaverFrame(wx.Frame):
         self.search_bar.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.OnCancelSearch)
 
         self.UpdateFileList()
+
+    def OnExit(self, event):
+        save_config()
+        self.Destroy()
+
 
     def UpdateFileList(self, search_text=""):
         kicad_pack_files = [filename for filename in os.listdir() if filename.endswith(".kicad_pack")]
@@ -139,12 +142,13 @@ class ClipboardSaverFrame(wx.Frame):
                 packed_data = f"packSch:[{clipboard_text}]"
                 with open(filename, "w") as file:
                     file.write(packed_data)
-                wx.MessageBox("Clipboard content saved successfully!", "Success")
+                wx.MessageBox("Clipboard content saved successfully as a Block!", "Success")
                 self.UpdateFileList()
+                self.filename_input.Clear()
             else:
                 wx.MessageBox("Clipboard is empty!", "Error")
         else:
-            wx.MessageBox("Please enter a valid file name.", "Error")
+            wx.MessageBox("Please enter a valid Block name.", "Error")
 
     def OnImport(self, event):
         selected_file = self.file_list.GetStringSelection()[2:] 
@@ -160,11 +164,11 @@ class ClipboardSaverFrame(wx.Frame):
                     data = wx.TextDataObject(clipboard_text)
                     clipboard.SetData(data)
                     clipboard.Close()
-                    wx.MessageBox("File content imported to clipboard!", "Success")
+                    wx.MessageBox("Block content imported to clipboard!", "Success")
                 else:
                     wx.MessageBox("Invalid file format.", "Error")
         else:
-            wx.MessageBox("Please select a file to import.", "Error")
+            wx.MessageBox("Please select a Block to import.", "Error")
 
     def OnChangeDirectory(self, event):
         dialog = wx.DirDialog(self, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
@@ -172,6 +176,7 @@ class ClipboardSaverFrame(wx.Frame):
             new_directory = dialog.GetPath()
             os.chdir(new_directory)
             self.UpdateFileList()
+            save_config()
         dialog.Destroy()
 
     def OnOpenDirectory(self, event):
@@ -214,13 +219,6 @@ class ClipboardSaverFrame(wx.Frame):
                 wx.MessageBox(f"Error importing file: {str(e)}", "Error")
         dialog.Destroy()
 
-
-    def OnExit(self, event):
-        save_config()
-        self.Destroy()
-
-
-
 def load_config():
     config = configparser.ConfigParser()
     config_file_path = os.path.join(os.path.dirname(__file__), "config.ini")  # Use absolute path
@@ -234,8 +232,3 @@ def save_config():
     config_file_path = os.path.join(os.path.dirname(__file__), "config.ini")  # Use absolute path
     with open(config_file_path, "w") as configfile:
         config.write(configfile)
-
-# if __name__ == "__main__":
-#     app = ClipboardSaverApp(False)
-#     app.MainLoop()
-
