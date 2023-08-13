@@ -1,31 +1,31 @@
 {
     "$schema": "https://go.kicad.org/pcm/schemas/v1",
-    "name": "My Beautiful Theme",
-    "description": "A theme that makes KiCad truly beautiful",
-    "description_full": "I came up with this theme in a dream one night.",
-    "identifier": "com.github.kicad-user.kicad-beautiful-theme",
-    "type": "colortheme",
+    "name": "Schematic Blocks Plug-In",
+    "description": "Save circuits as blocks and reuse them later in different projects or in the same project. ",
+    "description_full": "A plug-in can be used to save circuits as blocks. Then these circuit blocks can be reused in different projects. This plug-in aims to reduce schematic drawing time significantly. \nTo create a schematic block, first, select the circuit and copy it to the clipboard (Ctrl+C). Then open up the plug-in and give it a name by writing it in the text field at the top. Click the “Save Block” Button to save it in the working directory. If you want to change the working directory, you can click the “Change Working Directory” button. All the blocks are saved in the working directory. Also, all the blocks in that directory will be listed in the List box. \nTo import a Schematic Block to the project, first, select the Block in the plugin and click “Import Selected Block to Clipboard”. Go to the schematic and paste it on the sheet. ",
+    "identifier": "com.github.Sajitha-Aldeniya.KiCAD-Schematic-Blocks-Plugin",
+    "type": "plugin",
     "author": {
-        "name": "KiCad User",
+        "name": "Sajitha Aldeniya",
         "contact": {
-            "web": "https://mywebsite.com"
+            "web": "https://github.com/Sajitha-Aldeniya"
         }
     },
     "maintainer": {
-        "name": "KiCad User",
+        "name": "Sajitha Aldeniya",
         "contact": {
-            "web": "https://mywebsite.com"
+            "web": "https://github.com/Sajitha-Aldeniya/KiCAD-Schematic-Blocks-Plugin"
         }
     },
-    "license": "CC0-1.0",
+    "license": "MIT",
     "resources": {
-        "homepage": "https://github.com/kicad-user/kicad-beautiful-theme"
+        "homepage": "https://github.com/Sajitha-Aldeniya/KiCAD-Schematic-Blocks-Plugin"
     },
     "versions": [
         {
-            "version": "1.0",
-            "status": "stable",
-            "kicad_version": "5.99",
+            "version": "0.1",
+            "status": "testing",
+            "kicad_version": "6",
             "download_sha256": "YOUR_SHA256_HERE",
             "download_size": 1234,
             "download_url": "https://github.com/YOUR/DOWNLOAD/URL/kicad-beautiful-theme.zip",
