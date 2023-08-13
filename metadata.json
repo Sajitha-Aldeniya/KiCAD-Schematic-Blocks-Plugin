@@ -26,10 +26,10 @@
             "version": "0.1",
             "status": "testing",
             "kicad_version": "6",
-            "download_sha256": "YOUR_SHA256_HERE",
-            "download_size": 1234,
-            "download_url": "https://github.com/YOUR/DOWNLOAD/URL/kicad-beautiful-theme.zip",
-            "install_size": 5678
+            "download_sha256": "fcff8020f497017db902540e9776949379cc96c30ff265f06ab83219735134ef",
+            "download_size": 8270,
+            "download_url": "https://github.com/Sajitha-Aldeniya/KiCAD-Schematic-Blocks-Plugin/releases/download/v0.1/Schematic_Block_Plugin_v0.1.zip",
+            "install_size": 19326
         }
     ]
 }

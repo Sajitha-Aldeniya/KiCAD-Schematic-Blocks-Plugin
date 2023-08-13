@@ -1,5 +1,5 @@
 
-![PLATFORM](https://img.shields.io/badge/PLATFORM-KiCAD-informational?style=for-the-badge&?link=https://www.kicad.org/=https://www.kicad.org/)   ![Version](https://img.shields.io/badge/Version-v0.4-success?style=for-the-badge) ![Downloads](https://img.shields.io/github/downloads/Sajitha-Aldeniya/KiCAD-Schematic-Blocks-Plugin/total?style=for-the-badge&color=blueviolet) 
+![PLATFORM](https://img.shields.io/badge/PLATFORM-KiCAD-informational?style=for-the-badge&?link=https://www.kicad.org/=https://www.kicad.org/)   ![Version](https://img.shields.io/badge/Version-v0.1-success?style=for-the-badge)  ![Downloads](https://img.shields.io/github/downloads/Sajitha-Aldeniya/KiCAD-Schematic-Blocks-Plugin/total?style=for-the-badge&color=blueviolet) 
 
 ![Logo](./assets/logo.png)
 
