@@ -5,16 +5,16 @@ import platform
 import shutil
 import configparser
 
-class ClipboardSaverApp(wx.App):
+class SchematicBlockSaverPlugin(wx.App):
     def OnInit(self):
-        self.frame = ClipboardSaverFrame(None, title="Clipboard Saver",size=(400, 600))
+        self.frame = SchematicBlockSaverFrame(None, title="Schematic Block Saver",size=(400, 600))
         self.SetTopWindow(self.frame)
         self.frame.Show()
         return True
 
-class ClipboardSaverFrame(wx.Frame):
+class SchematicBlockSaverFrame(wx.Frame):
     def __init__(self, *args, **kwargs):
-        super(ClipboardSaverFrame, self).__init__(*args, **kwargs)
+        super(SchematicBlockSaverFrame, self).__init__(*args, **kwargs)
 
         self.InitUI()
 
@@ -27,13 +27,13 @@ class ClipboardSaverFrame(wx.Frame):
 
         vbox = wx.BoxSizer(wx.VERTICAL)
 
-        label1 = wx.StaticText(panel, label="Enter file name:")
+        label1 = wx.StaticText(panel, label="Enter Schematic Block name:")
         vbox.Add(label1, flag=wx.TOP | wx.LEFT | wx.RIGHT, border=10)
 
         self.filename_input = wx.TextCtrl(panel)
         vbox.Add(self.filename_input, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 
-        save_button = wx.Button(panel, label="Save Clipboard to .kicad_pack")
+        save_button = wx.Button(panel, label="Save Block")
         vbox.Add(save_button, flag=wx.EXPAND | wx.ALL, border=10)
 
         label2 = wx.StaticText(panel, label="Select a .kicad_pack file to import:")
@@ -45,10 +45,10 @@ class ClipboardSaverFrame(wx.Frame):
         self.file_list = wx.ListBox(panel)
         vbox.Add(self.file_list, proportion=1, flag=wx.EXPAND | wx.LEFT | wx.RIGHT, border=10)
 
-        import_button = wx.Button(panel, label="Import Selected File to Clipboard")
+        import_button = wx.Button(panel, label="Import Selected Block to Clipboard")
         vbox.Add(import_button, flag=wx.EXPAND | wx.ALL, border=10)
 
-        import_to_dir_button = wx.Button(panel, label="Import to Current Directory")
+        import_to_dir_button = wx.Button(panel, label="Import Block")
         vbox.Add(import_to_dir_button, flag=wx.EXPAND | wx.ALL, border=10)
 
         dir_button = wx.Button(panel, label="Change Working Directory")
@@ -57,7 +57,7 @@ class ClipboardSaverFrame(wx.Frame):
         open_dir_button = wx.Button(panel, label="Open Working Directory")
         vbox.Add(open_dir_button, flag=wx.EXPAND | wx.ALL, border=10)
 
-        delete_button = wx.Button(panel, label="Delete Selected File")
+        delete_button = wx.Button(panel, label="Delete Selected Block")
         delete_button.SetForegroundColour(wx.Colour(255, 0, 0))  # Set text color to red
         vbox.Add(delete_button, flag=wx.EXPAND | wx.ALL, border=10)
 
@@ -113,12 +113,13 @@ class ClipboardSaverFrame(wx.Frame):
                 packed_data = f"packSch:[{clipboard_text}]"
                 with open(filename, "w") as file:
                     file.write(packed_data)
-                wx.MessageBox("Clipboard content saved successfully!", "Success")
+                wx.MessageBox("Clipboard content saved successfully as a Block!", "Success")
                 self.UpdateFileList()
+                self.filename_input.Clear()
             else:
                 wx.MessageBox("Clipboard is empty!", "Error")
         else:
-            wx.MessageBox("Please enter a valid file name.", "Error")
+            wx.MessageBox("Please enter a valid Block name.", "Error")
 
     def OnImport(self, event):
         selected_file = self.file_list.GetStringSelection()[2:] 
@@ -134,11 +135,11 @@ class ClipboardSaverFrame(wx.Frame):
                     data = wx.TextDataObject(clipboard_text)
                     clipboard.SetData(data)
                     clipboard.Close()
-                    wx.MessageBox("File content imported to clipboard!", "Success")
+                    wx.MessageBox("Block content imported to clipboard!", "Success")
                 else:
                     wx.MessageBox("Invalid file format.", "Error")
         else:
-            wx.MessageBox("Please select a file to import.", "Error")
+            wx.MessageBox("Please select a Block to import.", "Error")
 
     def OnChangeDirectory(self, event):
         dialog = wx.DirDialog(self, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
@@ -204,5 +205,5 @@ def save_config():
         config.write(configfile)
 
 if __name__ == "__main__":
-    app = ClipboardSaverApp(False)
+    app = SchematicBlockSaverPlugin(False)
     app.MainLoop()
