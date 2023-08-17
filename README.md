@@ -44,3 +44,5 @@ Like this, you can save as many blocks as possible. When you need to import a ci
 - You can use a design block created in KiCad V6 in KiCad V7. But you can't use it the other way around. That means you can't use the design block created in KiCad V7 in KiCad V6 projects. 
 
 - Be careful when saving entire hierarchical sheets into blocks. It is possible. But I had some issues when transferring through KiCad versions. 
+
+:)
