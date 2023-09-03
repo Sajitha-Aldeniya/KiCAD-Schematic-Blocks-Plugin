@@ -622,7 +622,8 @@ packSch:[(lib_symbols
   (pin "1" (uuid 4e1e505e-8639-412b-af93-c0426a8dba78))
   (instances
     (project "pic_programmer"
-      (path "/2e45d1d2-c73f-46e5-98d6-3a9dc360bff5"
+      (path "/2e45d1d2-c73
+Discription:[ -- ENTER the discription of the circuit in here --- ]f-46e5-98d6-3a9dc360bff5"
         (reference "#PWR017") (unit 1)
       )
     )
@@ -781,5 +782,3 @@ packSch:[(lib_symbols
 )
 ]
 
-
-Discription:[ -- ENTER the discription of the circuit in here --- ]
