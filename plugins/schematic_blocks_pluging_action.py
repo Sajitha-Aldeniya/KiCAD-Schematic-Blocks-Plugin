@@ -22,8 +22,9 @@ class SchematicBlocksPluging(pcbnew.ActionPlugin):
     def Run(self):
         # The entry function of the plugin that is executed on user action
         print("Hello World")
-        app = SchematicBlockSaverPlugin(False)
-        app.MainLoop()
+        dialog = SchematicBlockSaverPlugin(None)
+        dialog.Center()
+        dialog.Show()
         # pcbnew.Refresh()
         
 
@@ -34,16 +35,18 @@ class SchematicBlocksPluging(pcbnew.ActionPlugin):
 
 
 
-class SchematicBlockSaverPlugin(wx.App):
-    def OnInit(self):
-        self.frame = SchematicBlockSaverFrame(None, title="Schematic Block Saver",size=(400, 600))
-        self.SetTopWindow(self.frame)
-        self.frame.Show()
-        return True
 
-class SchematicBlockSaverFrame(wx.Frame):
-    def __init__(self, *args, **kwargs):
-        super(SchematicBlockSaverFrame, self).__init__(*args, **kwargs)
+class SchematicBlockSaverPlugin(wx.Dialog):
+    def __init__(self, parent):
+        wx.Dialog.__init__(
+            self,
+            parent,
+            id=wx.ID_ANY,
+            title="Schematic Block Saver",
+            pos=wx.DefaultPosition,
+            size=wx.Size(400, 600),
+            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER | wx.MAXIMIZE_BOX,
+        )
 
         self.InitUI()
 
